@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo_transaction.dao.ProductOutDao">
+	
+	<!-- 목록조회 -->
+	<select id="selectList" resultType="product">
+		select * from product_out order by idx
+	</select>
+	<select id="selectOneFromIdx"  parameterType="int"  resultType="product">
+      select * from product_out where idx=#{ idx }
+   </select>
+	
+	<!-- 상품등록 null:auto_increment -->
+	<insert id="insert" parameterType="product">
+		insert into product_out values (null, #{ name }, #{ cnt }, now())
+	</insert>
+	
+	<!-- 상품수정(수쟝/날짜 만) -->
+	<update id="update" parameterType="int">
+		update product_out set cnt = #{ cnt }, regdate=now()
+		where idx = #{ idx }
+	</update>
+	
+	<!-- 상품삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from product_out where idx= #{ idx }
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
